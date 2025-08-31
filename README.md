@@ -12,20 +12,26 @@ Para la instalación de dependencias utiliza el siguiente comando en consola:
 ## Inicio de servidor
 1. Ejecuta el siguiente comando en consola para iniciar la aplicación
 ```bash
-    streamlit run main.py
+    streamlit run app.py
 ```
 2. Abre la página en la URL [http://localhost:8501/](http://localhost:8501/)
+3. Cierra el servidor local en consola con el comando `ctrl + c` en windows.
 
 ## Estructura del proyecto 
 
 ```
-📂 dashboard-generator
- ┣ 📂 app               # Código de la aplicación
- ┃ ┣ main.py            # Punto de entrada (Streamlit/Dash)
- ┃ ┣ utils.py           # Funciones auxiliares (lectura de Excel, limpieza, etc.)
- ┃ ┗ charts.py          # Funciones de generación de gráficos
- ┣ 📂 data              # Archivos de prueba
- ┣ requirements.txt     # Dependencias (pandas, streamlit, plotly, etc.)
- ┗ README.md            # Documentación
+project/
+│── app.py                  # archivo principal (Streamlit)
+│── data/
+│   ├── loader.py           # funciones para leer datos
+│   ├── cleaner.py          # funciones para limpiar y normalizar
+│   ├── type_handler.py     # funciones para tratamiento tipos de columna
+│── ui/
+│   ├── forms.py            # formularios de selección de columnas
+│   ├── dashboards.py       # vistas de gráficos
+│── utils/
+│   ├── config.py           # manejo de configuración (JSON, etc.)
+│   ├── helpers.py          # funciones auxiliares
+
 ```
 

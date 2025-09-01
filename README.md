@@ -17,6 +17,9 @@ Para la instalación de dependencias utiliza el siguiente comando en consola:
 2. Abre la página en la URL [http://localhost:8501/](http://localhost:8501/)
 3. Cierra el servidor local en consola con el comando `ctrl + c` en windows.
 
+## Abrir en la web
+Puedes ingresar a este [https://generadordashboard.streamlit.app/](Dominio)
+
 ## Estructura del proyecto 
 
 ```
@@ -34,7 +37,6 @@ project/
 │   ├── dashboards.py       # vistas de gráficos
 │── utils/
 │   ├── config.py           # manejo de configuración (JSON, etc.)
-│   ├── helpers.py          # funciones auxiliares
 
 ```
 

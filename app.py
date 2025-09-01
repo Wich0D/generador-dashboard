@@ -16,6 +16,7 @@ st.set_page_config(
 pages ={
     "Menu": [
         st.Page(r"pages\main_page.py", title="Generar Dashboard"),
+        st.Page(r"pages\dataframe.py", title="Ver Dataframe"),
         st.Page(r"pages\final_dashboard.py", title="Dashboard Final"),
     ]
 }

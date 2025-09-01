@@ -1,6 +1,4 @@
 import streamlit as st
-import pandas as pd
-import plotly.express as px
 
 from data.cleaner import clean_columns
 from data.loader import load_data
@@ -13,14 +11,13 @@ st.set_page_config(
     page_icon="📊",
     layout="centered",
 )
-st.title("📊 Generador de Dashboards")
+# Cargar datos si ya se eligió un archivo
+if "uploaded_file" not in st.session_state:
+    st.session_state["uploaded_file"] = None
+if "df" not in st.session_state:
+    st.session_state["df"] = None
 
-pages ={
-    "Mi Dashboard": [
-        st.Page(r"pages\main_page.py", title="Generar Dashboard"),
-        st.Page(r"pages\final_dashboard.py", title="Dashboard Final"),
-    ]
-}
+st.title("📊 Generador de Dashboards")
 
 # Cargar archivo
 uploaded_file = st.file_uploader("Sube tu archivo Excel o CSV", type=["xlsx", "csv"])
@@ -29,6 +26,7 @@ if uploaded_file:
     # Leer archivo
     df = load_data(uploaded_file)
     df = clean_columns(df)
+    st.session_state["df"] = df
     #st.toast("Dataframe cargado con éxito", icon="😍")
     st.subheader("Vista previa de los datos:")
     st.dataframe(df.head(10))

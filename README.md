@@ -26,6 +26,9 @@ project/
 │   ├── loader.py           # funciones para leer datos
 │   ├── cleaner.py          # funciones para limpiar y normalizar
 │   ├── type_handler.py     # funciones para tratamiento tipos de columna
+│── pages/
+│   ├── final_dashboard.py  # Página de dashboard final
+│   ├── main_page.py        # Página de dashboard final
 │── ui/
 │   ├── forms.py            # formularios de selección de columnas
 │   ├── dashboards.py       # vistas de gráficos

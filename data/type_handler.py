@@ -14,5 +14,4 @@ def detect_column_types(df):
             types[col] = "datetime64"
         else:
             types[col] = "string"
-    print(types)
     return types

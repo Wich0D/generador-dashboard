@@ -18,6 +18,7 @@ pages ={
         st.Page(r"pages\main_page.py", title="Generar Dashboard"),
         st.Page(r"pages\dataframe.py", title="Ver Dataframe"),
         st.Page(r"pages\final_dashboard.py", title="Dashboard Final"),
+        st.Page(r"pages\"guide.py)",title=" Guia rapida")
     ]
 }
 pg = st.navigation(pages)

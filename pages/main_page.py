@@ -4,7 +4,7 @@ from data.cleaner import clean_columns
 from data.loader import load_data
 from data.type_handler import detect_column_types
 from ui.dashboards import gen_chart
-from ui.forms import chart_columns_type_selector, columns_type_selector, column_selector
+from ui.forms import *
 
 st.set_page_config(
     page_title= "Generador de Dashboards",
@@ -30,6 +30,20 @@ if uploaded_file:
     #st.toast("Dataframe cargado con éxito", icon="😍")
     st.subheader("Vista previa de los datos:")
     st.dataframe(df.head(10))
+
+    # Seleccion de tipos de datos
+    #st.subheader("Ajusta los datos para mayor precisión:")
+    types = detect_column_types(df)
+    #columns_type_selector(df, types)
+    st.subheader("Reajusta tus columnas")
+    new_df = column_editor(df,types)
+    if not new_df.empty:
+        if st.button("Guardar"):
+            new_df = new_df.copy()
+            print(new_df)
+            st.toast("Cambios guardados")
+        
+
 
     # Formulario tipo de gráficas
     st.subheader("Genera una gráfica")

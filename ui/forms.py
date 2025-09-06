@@ -53,8 +53,38 @@ def columns_type_selector(df, data_type):
         submitted = st.form_submit_button("Guardar tipos")
 
     if submitted:
+        st.success("Tipo de datos guardados correctamente ✅")
         return new_types
     return None
+
+def column_editor(df,data_type):
+    """Formulario para renombrar y ajustar tipo de columnas"""
+    st.subheader("Elige y renombra las columnas a considerar")
+
+    # Crear DataFrame temporal para el editor
+    data_selector = pd.DataFrame({
+        "columna": df.columns,
+        "tipo": list(data_type.values()),
+    })
+
+    # Mostrar editor interactivo
+    selected_columns = st.data_editor(
+        data_selector,
+        column_config={
+            "columna": st.column_config.TextColumn(
+                "Columna",
+                help="Renombra la columna para tu dashboard si así lo deseas"
+            ),
+            "tipo": st.column_config.SelectboxColumn(
+                "Tipo de dato",
+                help="Selecciona el tipo de columna",
+                options=["numeric", "string", "boolean", "datetime"],
+                
+            )
+        },
+        hide_index=True
+    )   
+    return selected_columns
 
 
 def chart_columns_type_selector(df, data_type, chart_type):

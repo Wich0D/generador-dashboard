@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit import session_state
 
 from data.cleaner import clean_columns
 from data.loader import load_data
@@ -11,28 +12,21 @@ st.set_page_config(
     page_icon="📊",
     layout="centered",
 )
-# Cargar datos si ya se eligió un archivo
-if "uploaded_file" not in st.session_state:
-    st.session_state["uploaded_file"] = None
-if "df" not in st.session_state:
-    st.session_state["df"] = None
 
-st.title("📊 Generador de Dashboards")
 
-# Cargar archivo
-uploaded_file = st.file_uploader("Sube tu archivo Excel o CSV", type=["xlsx", "csv"])
+def load_main_page(df):
+    # Boton para volver a cargar archivo
+    if "df" in st.session_state:
+        reset_btn = st.button("Volver a elegir archivo")
+        if reset_btn:
+            del st.session_state["df"]
+            st.rerun()
 
-if uploaded_file:
-    # Leer archivo
-    df = load_data(uploaded_file)
-    df = clean_columns(df)
-    st.session_state["df"] = df
     #st.toast("Dataframe cargado con éxito", icon="😍")
     st.subheader("Vista previa de los datos:")
     st.dataframe(df.head(10))
 
     # Seleccion de tipos de datos
-    #st.subheader("Ajusta los datos para mayor precisión:")
     types = detect_column_types(df)
     #columns_type_selector(df, types)
     st.subheader("Reajusta tus columnas")
@@ -83,3 +77,19 @@ if uploaded_file:
         st.subheader("Ajusta los datos para mayor precisión:")
         types = detect_column_types(df_formatted)
         columns_type_selector(df_formatted, types)
+
+# Load page
+st.title("📊 Generador de Dashboards")
+
+if "df" in st.session_state:
+    df = st.session_state["df"]
+    load_main_page(df)
+else:
+    # Cargar archivo
+    uploaded_file = st.file_uploader("Sube tu archivo Excel o CSV", type=["xlsx", "csv"])
+    if uploaded_file:
+        # Leer archivo
+        df = load_data(uploaded_file)
+        df = clean_columns(df)
+        st.session_state["df"] = df
+        load_main_page(df)

@@ -15,3 +15,7 @@ def detect_column_types(df):
         else:
             types[col] = "string"
     return types
+
+def parse_columns(df):
+    """Verifica que las columnas cunplan con el formato establecido y
+    formatea conforme al distinto tipo de dato"""

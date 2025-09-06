@@ -15,12 +15,12 @@ st.set_page_config(
 
 pages ={
     "Menu": [
-        st.Page(r"pages\main_page.py", title="Generar Dashboard"),
-        st.Page(r"pages\dataframe.py", title="Ver Dataframe"),
-        st.Page(r"pages\final_dashboard.py", title="Dashboard Final"),
-        st.Page(r"pages\"guide.py)",title=" Guia rapida")
+        st.Page(r"app_pages\main_page.py", title="Generar Dashboard", icon="✏️"),
+        st.Page(r"app_pages\dataframe.py", title="Ver Dataframe", icon="📋"),
+        st.Page(r"app_pages\final_dashboard.py", title="Dashboard Final", icon="📊"),
+        st.Page(r"app_pages\guide.py", title="Guia rapida", icon="📓")
     ]
 }
-pg = st.navigation(pages)
+pg = st.navigation(pages, position="sidebar",expanded=True)
 pg.run()
 

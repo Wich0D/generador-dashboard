@@ -18,7 +18,7 @@ Para la instalación de dependencias utiliza el siguiente comando en consola:
 3. Cierra el servidor local en consola con el comando `ctrl + c` en windows.
 
 ## Abrir en la web
-Puedes ingresar a este [https://generadordashboard.streamlit.app/](Dominio)
+Puedes ingresar a este [Dominio](https://generadordashboard.streamlit.app/)
 
 ## Estructura del proyecto 
 
@@ -29,9 +29,12 @@ project/
 │   ├── loader.py           # funciones para leer datos
 │   ├── cleaner.py          # funciones para limpiar y normalizar
 │   ├── type_handler.py     # funciones para tratamiento tipos de columna
-│── pages/
+│── images/
+│── app_pages/
+│   ├── dataframe.py        # Página de vista a dataframe 
 │   ├── final_dashboard.py  # Página de dashboard final
-│   ├── main_page.py        # Página de dashboard final
+│   ├── guide.py            # Página de guía de uso
+│   ├── main_page.py        # Página de diseño de dashboard
 │── ui/
 │   ├── forms.py            # formularios de selección de columnas
 │   ├── dashboards.py       # vistas de gráficos

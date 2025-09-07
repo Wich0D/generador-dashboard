@@ -1,6 +1,8 @@
-import time
+from datetime import datetime
 import io
 import streamlit as st
+
+from data.loader import load_css
 
 st.title("📊 Dashboard Final")
 
@@ -50,7 +52,7 @@ if st.session_state["graficas_guardadas"]:
 
     with col1:
         final_name = st.text_input("Elige el nombre de tu dashboard:")
-        if final_name is None:
+        if not final_name:
             final_name = "Dashboard"
 
     with col3:
@@ -60,9 +62,10 @@ if st.session_state["graficas_guardadas"]:
             buf = io.StringIO()
             html_sections = []
 
-            html_sections.append(f"<h1>{st.session_state.get('dashboard_title', final_name)}</h1>")
+            html_sections.append(f"<h1>{st.session_state.get('dashboard_title', f"{final_name} - Generado: {datetime.now()}")}</h1>")
             graficas = st.session_state.get("graficas_guardadas", [])
             for i, g in enumerate(graficas):
+                g["fig"].update_layout(template="ggplot2")
                 title = g["name"] if g["name"] else f"Gráfica {i + 1}"
                 subtitle = g.get("subtitle", "")  # si quieres permitir subtítulos
                 # Título y subtítulo como HTML
@@ -71,9 +74,12 @@ if st.session_state["graficas_guardadas"]:
                     html_section += f"<h4>{subtitle}</h4>"
                 # Insertamos la gráfica
                 html_section += g["fig"].to_html(full_html=False, include_plotlyjs="cdn")
+                html_section += "<hr><br>"
                 html_sections.append(html_section)
 
-            html_content = "<html><body>" + "".join(html_sections) + "</body></html>"
+            html_content = f"""<html>
+            <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>{load_css()}</style></head><body><div class="main-container"> {"".join(html_sections)}</div></body></html>"""
             buf.write(html_content)
             buf.seek(0)
 
@@ -83,6 +89,7 @@ if st.session_state["graficas_guardadas"]:
                 file_name=f"{final_name}.html",
                 mime="text/html"
             )
+
 else:
     st.info("Aún no has guardado gráficas.")
 

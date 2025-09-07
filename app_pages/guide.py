@@ -3,8 +3,7 @@ import os.path
 import streamlit as st
 from PIL import Image
 
-
-# Imagenes
+# Imágenes
 image_path = os.path.join('images', 'guide_1.png')
 image1 = Image.open(image_path)
 image_path = os.path.join('images', 'guide_2.png')
@@ -13,54 +12,53 @@ image_path = os.path.join('images', 'guide_3.png')
 image3 = Image.open(image_path)
 
 text = "SIIfkafa"
-st.title("📊 Guia de uso")
+st.title("📊 Guía de uso")
 
-st.text("Para poder generar tu dashboard necesitas simplemente seguir los siguientes pasos")
+st.text("Para poder generar tu dashboard, simplemente necesitas seguir los siguientes pasos.")
 
 st.markdown(f"""            
-#### 1. Prepara tu hoja de calculo y subela
+#### 1. Prepara tu hoja de cálculo y súbela
 
-Para poder iniciar necesitas una **hoja de calculo** en formato **.xlsx** o **.csv**.Debe seguir el siguiente formato:
+Para poder iniciar, necesitas una **hoja de cálculo** en formato **.xlsx** o **.csv**. Debe seguir el siguiente formato:
 
-- Todos los datos de una columna deben ser de un mismo tipo: 
-    - Numericos: Solamente utilizar valores numericos en los registros (0 - 9), evita utilizar unidades
-    - Fecha: Respeta cualquiera de llos siguientes formatos
-    - Texto (String): En este tipo de dato no tiene restricciones de nomenclatura
-    - Booleano: Solo pueden tener dos valores, True o False        
-- El archivo no debe pesar mas de 200 MB, en caso contrario no lo podra procesar el sitema
-- **No utilices filas como columnas**, en este caso el programa no podrá trabajar con tus datos.    
+- Todos los datos de una columna deben ser del mismo tipo: 
+    - Numéricos: Solamente utilizar valores numéricos en los registros (0 - 9), evita utilizar unidades.
+    - Fecha: Respeta cualquiera de los siguientes formatos.
+    - Texto (String): Este tipo de dato no tiene restricciones de nomenclatura.
+    - Booleano: Solo pueden tener dos valores: True o False.        
+- El archivo no debe pesar más de 200 MB; en caso contrario, el sistema no lo podrá procesar.
+- **No utilices filas como columnas**, en este caso, el programa no podrá trabajar con tus datos.    
 
-Una vez tus datos cumplan con el formato establecido, entra a la página **Generar Dashboard** y arrastra o selecciona tu archivo en el dropbox:
+Una vez que tus datos cumplan con el formato establecido, entra a la página **Generar Dashboard** y arrastra o selecciona tu archivo en el Dropbox:
 """)
-st.image(image1, caption="Dropbox en página Generar Dashboard")
-st.page_link(r"app_pages\main_page.py", label="Generar Dashboard", icon="✏️")
+st.image(image1, caption="Dropbox en la página 'Generar Dashboard'")
+st.page_link(r"app_pages/main_page.py", label="Generar Dashboard", icon="✏️")
 st.markdown(f"""  
 ---          
-#### 2. Asegurate que los tipos de datos sean correctos
-            
-Una vez que cargaste el archivo, podras observar una vista previa de tus datos y una tabla donde puedes ajustar el tipo de dato de las columnas y reajustar su nombre
-para poder hacer un analisis mas preciso
+#### 2. Asegúrate de que los tipos de datos sean correctos
+
+Una vez que hayas cargado el archivo, podrás observar una vista previa de tus datos y una tabla donde puedes ajustar el tipo de dato de las columnas y reajustar su nombre
+para poder hacer un análisis más preciso.
 """)
-st.image(image2, caption="Tabla para renombrar columnas y cambiar tipo de dato")
+st.image(image2, caption="Tabla para renombrar columnas y cambiar el tipo de dato")
 st.markdown(f"""  
-> **Nota: Asegurate de colocar los tipos de datos correctos, de lo contrario el analisis puede ser poco preciso**
+> **Nota: Asegúrate de colocar los tipos de datos correctos; de lo contrario, el análisis puede ser poco preciso.**
 """)
 st.markdown(f""" 
 ---
-#### 3. Genera tus graficos y guardalos
+#### 3. Genera tus gráficos y guárdalos
 
-Comienza a seleccinar los parametros en la seccion **Genera una gáfica. Asigna un nombre a tu gráfica, el tipo de gráfica y por último los valores que se van a analizar:
+Comienza a seleccionar los parámetros en la sección **Genera una gráfica**. Asigna un nombre a tu gráfica, el tipo de gráfica y, por último, los valores que se van a analizar:
 """)
 
 st.markdown(f""" 
-Una vez que termines de seleccionar los parámetros da click en el botón **💾 Guardar grafica en Dashboard** para agregar la gráfica a tu dashboard final, debe aparecer el siguiente mensaje de confirmación:                       
+Una vez que termines de seleccionar los parámetros, da clic en el botón **💾 Guardar gráfica en Dashboard** para agregar la gráfica a tu dashboard final. Debe aparecer el siguiente mensaje de confirmación:                       
 """)
 st.image(image3, caption="Formulario para generar la gráfica")
 st.markdown(f""" 
 ---
-#### 4. Observa tu resultado y descargalo
-Accede a la pagina **Dashboard Final** y podras observar un listado de todas las gráficas que ya has guardado anteriormente, podras eliminar aquellas que no deseas conservar
-con el boton **❌ Eliminar gráfica**, en caso de que tengas ya todos los resultados que deseas, da click en el boton **Descargar** e iniciara la descarga de tu dashboard en formato HTML y PDF.                                   
+#### 4. Observa tu resultado y descárgalo
+Accede a la página **Dashboard Final** y podrás observar un listado de todas las gráficas que ya has guardado anteriormente. Podrás eliminar aquellas que no desees conservar
+con el botón **❌ Eliminar gráfica**. En caso de que ya tengas todos los resultados que deseas, da clic en el botón **Descargar** e iniciará la descarga de tu dashboard en formato HTML.                                   
 """)
-st.page_link(r"app_pages\main_page.py", label="Acceder a Dashboard Final", icon="📊")
-
+st.page_link(r"app_pages/final_dashboard.py", label="Acceder al Dashboard Final", icon="📊")

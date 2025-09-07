@@ -16,6 +16,16 @@ st.set_page_config(
     layout="centered",
 )
 
+chart_options = [
+    "Línea",
+    "Línea (múltiples)",
+    "Barras",
+    "Barras divididas",
+    "Pie (Pastel)",
+    "Dispersión",
+    "ECDF"
+]
+
 
 def load_main_page(df):
 
@@ -54,9 +64,10 @@ def load_main_page(df):
     if "graficas_guardadas" not in st.session_state:
         st.session_state["graficas_guardadas"] = []
 
+
     chart_type = st.selectbox(
         "Selecciona el tipo de gráfica",
-        ["Línea","Línea (múltiples)", "Barras","Barras divididas","Pie (Pastel)","Dispersión"]
+        chart_options
     )
     st.markdown("----")
 
@@ -67,26 +78,17 @@ def load_main_page(df):
     gen_chart(fig,chart_name)
 
     # Botón para guardar la gráfica
-    if st.button("💾 Guardar gráfica en dashboard"):
-        st.session_state["graficas_guardadas"].append({
-            "fig": fig,
-            "name": chart_name
-        })
-        st.success("Gráfica añadida al Dashboard ✅")
+    st.markdown("---")
+    col1, col2, col3 = st.columns([1, 2, 1])
 
 
-    # Formulario de selector decolumnas
-    selected_columns = column_selector(df)
-    column_filter = selected_columns.loc[selected_columns['utilizar'] == True, 'columna']
-    df_formatted = df[column_filter]
-
-    # Configuración de columnas seleccionadas
-    if df_formatted.empty or len(df_formatted.columns)<2:
-        st.subheader("Debes seleccionar por lo menos dos columnas")
-    else:
-        st.subheader("Ajusta los datos para mayor precisión:")
-        types = detect_column_types(df_formatted)
-        columns_type_selector(df_formatted, types)
+    with col2:
+        if st.button("💾 Guardar gráfica en dashboard"):
+            st.session_state["graficas_guardadas"].append({
+                "fig": fig,
+                "name": chart_name
+            })
+            st.success("Gráfica añadida al Dashboard ✅")
 
 
 

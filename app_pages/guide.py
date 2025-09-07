@@ -9,6 +9,8 @@ image_path = os.path.join('images', 'guide_1.png')
 image1 = Image.open(image_path)
 image_path = os.path.join('images', 'guide_2.png')
 image2 = Image.open(image_path)
+image_path = os.path.join('images', 'guide_3.png')
+image3 = Image.open(image_path)
 
 text = "SIIfkafa"
 st.title("📊 Guia de uso")
@@ -39,7 +41,7 @@ st.markdown(f"""
 Una vez que cargaste el archivo, podras observar una vista previa de tus datos y una tabla donde puedes ajustar el tipo de dato de las columnas y reajustar su nombre
 para poder hacer un analisis mas preciso
 """)
-st.image(image2, caption="Ejemplo de previsualización de datos")
+st.image(image2, caption="Tabla para renombrar columnas y cambiar tipo de dato")
 st.markdown(f"""  
 > **Nota: Asegurate de colocar los tipos de datos correctos, de lo contrario el analisis puede ser poco preciso**
 """)
@@ -47,14 +49,18 @@ st.markdown(f"""
 ---
 #### 3. Genera tus graficos y guardalos
 
-Comienza a seleccinar los parametros en la seccion **Generar grafica**, asigna un nombre a tu grafica, el tipo de grafica y por ultimo los valores que se van a analizar.
-Una vez que termines de seleccionar los parametros da clic en el boton **Guardar** para agregar la grafica a tu dashboard final, debe aarecer el siguiente mensaje de confirmacion:                       
+Comienza a seleccinar los parametros en la seccion **Genera una gáfica. Asigna un nombre a tu gráfica, el tipo de gráfica y por último los valores que se van a analizar:
 """)
 
 st.markdown(f""" 
+Una vez que termines de seleccionar los parámetros da click en el botón **💾 Guardar grafica en Dashboard** para agregar la gráfica a tu dashboard final, debe aparecer el siguiente mensaje de confirmación:                       
+""")
+st.image(image3, caption="Formulario para generar la gráfica")
+st.markdown(f""" 
 ---
 #### 4. Observa tu resultado y descargalo
-Accede a la pagina **Dashboard Final** y podras observar un listado de todas las graficas que ya has guardado anteriormente, podras eliminar aqullas que no deseas conservar
-con el boton **eliminar**, en caso de que tengas ya todos los resultados que deseas, da click en el boton **Descargar** e iniciara la descarga de tu dashboard en formato HTML y PDF.                                   
+Accede a la pagina **Dashboard Final** y podras observar un listado de todas las gráficas que ya has guardado anteriormente, podras eliminar aquellas que no deseas conservar
+con el boton **❌ Eliminar gráfica**, en caso de que tengas ya todos los resultados que deseas, da click en el boton **Descargar** e iniciara la descarga de tu dashboard en formato HTML y PDF.                                   
 """)
+st.page_link(r"app_pages\main_page.py", label="Acceder a Dashboard Final", icon="📊")
 

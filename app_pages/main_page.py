@@ -1,9 +1,12 @@
+import time
+
 import streamlit as st
 from streamlit import session_state
 
 from data.cleaner import clean_columns
 from data.loader import load_data
-from data.type_handler import detect_column_types
+from data.type_handler import detect_column_types, parse_columns
+from ui.chart_forms import chart_columns_type_selector
 from ui.dashboards import gen_chart
 from ui.forms import *
 
@@ -15,27 +18,32 @@ st.set_page_config(
 
 
 def load_main_page(df):
-    # Boton para volver a cargar archivo
-    if "df" in st.session_state:
-        reset_btn = st.button("Volver a elegir archivo")
-        if reset_btn:
-            del st.session_state["df"]
-            st.rerun()
 
-    #st.toast("Dataframe cargado con éxito", icon="😍")
+
     st.subheader("Vista previa de los datos:")
     st.dataframe(df.head(10))
 
     # Seleccion de tipos de datos
+
     types = detect_column_types(df)
-    #columns_type_selector(df, types)
     st.subheader("Reajusta tus columnas")
-    new_df = column_editor(df,types)
-    if not new_df.empty:
+    new_columns_values = column_editor(df, types)
+
+    if not new_columns_values.empty:
         if st.button("Guardar"):
-            new_df = new_df.copy()
-            print(new_df)
-            st.toast("Cambios guardados")
+            # Mapear columnas originales → nuevas
+            rename_map = {
+                old: new
+                for old, new in zip(df.columns, new_columns_values["columna"].values)
+                if old != new
+            }
+
+            if rename_map:
+                st.session_state["df"].rename(columns=rename_map, inplace=True)
+                st.toast("Cambios guardados ✅")
+                time.sleep(1)
+                st.rerun()
+
         
 
 
@@ -48,9 +56,11 @@ def load_main_page(df):
 
     chart_type = st.selectbox(
         "Selecciona el tipo de gráfica",
-        ["Línea", "Barras","Pie (Pastel)","Dispersión"]
+        ["Línea","Línea (múltiples)", "Barras","Barras divididas","Pie (Pastel)","Dispersión"]
     )
     st.markdown("----")
+
+
     # Formulario de selector decolumnas
     data_type = detect_column_types(df)
     fig,chart_name = chart_columns_type_selector(df, data_type, chart_type)
@@ -78,11 +88,20 @@ def load_main_page(df):
         types = detect_column_types(df_formatted)
         columns_type_selector(df_formatted, types)
 
+
+
 # Load page
 st.title("📊 Generador de Dashboards")
 
 if "df" in st.session_state:
     df = st.session_state["df"]
+    # Boton para volver a cargar archivo
+    if "df" in st.session_state:
+        reset_btn = st.button("Volver a elegir archivo")
+        if reset_btn:
+            del st.session_state["df"]
+            st.rerun()
+    # Cargar resto de la página
     load_main_page(df)
 else:
     # Cargar archivo

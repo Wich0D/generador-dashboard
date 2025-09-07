@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+from ui.chart_forms import plotly_chart_form
+
+
 def column_selector(df):
     """Formulario para elegir las columnas a analizar"""
     st.subheader("Elige y renombra las columnas a considerar")
@@ -45,7 +48,7 @@ def columns_type_selector(df, data_type):
             selected_type = st.selectbox(
                 f"{column}",
                 ("numeric", "string", "boolean", "datetime"),
-                index=("numeric", "string", "boolean", "datetime").index(default_type)
+                index=("numeric", "string", "datetime").index(default_type)
             )
 
             new_types[column] = selected_type
@@ -78,46 +81,15 @@ def column_editor(df,data_type):
             "tipo": st.column_config.SelectboxColumn(
                 "Tipo de dato",
                 help="Selecciona el tipo de columna",
-                options=["numeric", "string", "boolean", "datetime"],
-                
+                options=["numeric", "string","datetime"],
             )
         },
-        hide_index=True
-    )   
+        hide_index=True,
+        key="Column_editor"
+    )
+
     return selected_columns
 
-
-def chart_columns_type_selector(df, data_type, chart_type):
-    """Formulario para elegir columnas según el tipo de gráfico"""
-
-    # Filtrar columnas por tipo
-    numeric_cols = [col for col, t in data_type.items() if t == "numeric"]
-    datetime_cols = [col for col, t in data_type.items() if t == "datetime"]
-    string_cols = [col for col, t in data_type.items() if t == "string"]
-
-    fig = None  # Inicializamos fig
-    chart_name = st.text_input("Nombre de la gráfica", value= "")
-
-    if chart_type == "Línea":
-        x = st.selectbox("Eje X (fecha)", datetime_cols)
-        y = st.selectbox("Eje Y (valor)", numeric_cols)
-        fig = px.line(df, x=x, y=y)
-
-    elif chart_type == "Barras":
-        x = st.selectbox("Categoría", string_cols)
-        y = st.selectbox("Valor", numeric_cols)
-        fig = px.bar(df, x=x, y=y)
-
-    elif chart_type == "Pie":
-        names = st.selectbox("Categoría", string_cols)
-        values = st.selectbox("Valores", numeric_cols)
-        fig = px.pie(df, names=names, values=values)
-
-    elif chart_type == "Dispersión":
-        x = st.selectbox("Eje X", numeric_cols)
-        y = st.selectbox("Eje Y", numeric_cols)
-        fig = px.scatter(df, x=x, y=y)
-    return fig,chart_name
 
 
 

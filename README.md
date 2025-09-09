@@ -31,6 +31,7 @@ project/
 │   ├── type_handler.py     # funciones para tratamiento tipos de columna
 │── images/
 │── app_pages/
+│   ├── convai.py           # Asistente virtual
 │   ├── dataframe.py        # Página de vista a dataframe 
 │   ├── final_dashboard.py  # Página de dashboard final
 │   ├── guide.py            # Página de guía de uso

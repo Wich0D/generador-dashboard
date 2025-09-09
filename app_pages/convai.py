@@ -6,9 +6,6 @@ from dotenv import load_dotenv
 # Carga las variables del archivo .env
 load_dotenv()
 
-
-
-
 # --- Configuración de la API de Convai ---
 CONVAI_API_KEY = os.getenv("CONVAI_API_KEY")
 

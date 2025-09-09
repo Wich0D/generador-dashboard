@@ -19,7 +19,7 @@ pages = [
         st.Page("app_pages/dataframe.py", title="Ver Dataframe", icon="📋"),
         st.Page("app_pages/final_dashboard.py", title="Dashboard Final", icon="📊"),
         st.Page("app_pages/guide.py", title="Guia rapida", icon="📓"),
-        st.Page("app_pages/pruebas.py", title="Asitente Virtual", icon="🚀")
+        st.Page("app_pages/convai.py", title="Asitente Virtual", icon="🚀")
     ]
 pg = st.navigation(pages, position="sidebar",expanded=True)
 pg.run()
